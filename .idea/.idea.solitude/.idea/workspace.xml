@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ff5129ce-aa9a-4842-8cb8-bb3621b5e3e6" name="Default Changelist" comment="" />
+    <list default="true" id="ff5129ce-aa9a-4842-8cb8-bb3621b5e3e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.solitude/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.solitude/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Sound.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Sound.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AudioManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -14,22 +22,24 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/run.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AudioManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Sound.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1h8pwPblT0WIoJYaoBiIwQLKRie" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -60,7 +70,8 @@
       <option name="presentableId" value="Default" />
       <updated>1599402819323</updated>
       <workItem from="1599402823416" duration="12935000" />
-      <workItem from="1599427145784" duration="295000" />
+      <workItem from="1599427145784" duration="1509000" />
+      <workItem from="1599441704554" duration="811000" />
     </task>
     <servers />
   </component>
@@ -73,13 +84,21 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="304" y="113" key="#Inspection_severity" timestamp="1599442165797">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="304" y="113" key="#Inspection_severity/0.23.1440.877/-544.-1417.2560.1417@0.23.1440.877" timestamp="1599442165797" />
+    <state x="287" y="144" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1599441585636">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="287" y="144" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.23.1440.877/-544.-1417.2560.1417@0.23.1440.877" timestamp="1599441585636" />
     <state x="469" y="193" key="RiderGenerateDialog" timestamp="1599402862532">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="469" y="193" key="RiderGenerateDialog/0.23.1440.877/-544.-1417.2560.1417@0.23.1440.877" timestamp="1599402862532" />
-    <state x="229" y="100" key="SettingsEditor" timestamp="1599406628320">
+    <state x="250" y="109" key="SettingsEditor" timestamp="1599441917769">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="229" y="100" key="SettingsEditor/0.23.1440.877/-544.-1417.2560.1417@0.23.1440.877" timestamp="1599406628320" />
+    <state x="250" y="109" key="SettingsEditor/0.23.1440.877/-544.-1417.2560.1417@0.23.1440.877" timestamp="1599441917769" />
   </component>
 </project>

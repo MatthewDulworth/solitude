@@ -1,40 +1,46 @@
-﻿using Unity.Audio;
-using System;
+﻿using System;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
-{
+/**
+ * handles dynamic soundtrack and ambience
+ * singleton pattern
+ */
+public class AudioManager : MonoBehaviour {
+    // singleton
     public static AudioManager Instance;
-    
+
+    // sounds
     [SerializeField] private Sound[] sounds = null;
-    
-    private void Awake()
-    {
-        if (Instance && Instance != this)
-        {
+
+    private void Awake() {
+        // enforce singleton
+        if (Instance && Instance != this) {
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        foreach (Sound s in sounds) 
+
+        // init each audio source
+        foreach (Sound s in sounds) {
             s.Init(gameObject.AddComponent<AudioSource>());
+        }
     }
 
-    private void Start()
-    {
+    private void Start() {
         Play("note");
         Play("wind");
     }
 
-    public void Play(string soundName)
-    {
+    // plays a specified audio clip
+    public void Play(string soundName) {
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
         s?.Play();
     }
 
-    public void Pause(string soundName)
-    {
+    // stops a specified audio clip
+    public void Stop(string soundName) {
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
         s?.Pause();
     }

@@ -1,24 +1,24 @@
 using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 /**
  * Stores the information for a sound clip.
  * Can play or pause.
  */
 [Serializable]
-public class Sound
-{
+public class Sound {
     private AudioSource source;
+
+    // editor vars
     public string name;
     public AudioClip clip;
     public bool loop;
-    
+
     [Range(0f, 1f)] public float volume;
     [Range(.1f, 3f)] public float pitch;
-    
-    public void Init(AudioSource src)
-    {
+
+    // inits the audio source 
+    public void Init(AudioSource src) {
         source = src;
         source.playOnAwake = false;
         source.clip = clip;
@@ -27,15 +27,17 @@ public class Sound
         source.loop = loop;
     }
 
-    public void Play()
-    {
-        if (!source.isPlaying)
+    // pauses the audio source
+    public void Play() {
+        if (!source.isPlaying) {
             source.Play();
+        }
     }
 
-    public void Pause()
-    {
-        if(source.isPlaying)
+    // plays the audio source
+    public void Pause() {
+        if (source.isPlaying) {
             source.Pause();
+        }
     }
 }
