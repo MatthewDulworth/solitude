@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -33,13 +32,13 @@ public class Movement : MonoBehaviour {
         dir += Input.GetKey(KeyCode.D) ? 1 : 0;
 
         // update jump
-        jump = Input.GetKey(KeyCode.Space);
+        jump = (Input.GetKeyDown(KeyCode.Space) || jump) && grounded;
     }
 
     private void FixedUpdate() {
         rb.velocity = new Vector2(dir * speed, rb.velocity.y);
 
-        if (jump && grounded) {
+        if (jump) {
             rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
             jump = false;
         }
@@ -51,14 +50,20 @@ public class Movement : MonoBehaviour {
         HandleJumpGravity();
     }
 
+    /**
+     * Handles the behavior for long and short jumps as well as fall speed.
+     */
     private void HandleJumpGravity() {
         if (rb.velocity.y < 0) {
+            // player is falling 
             rb.gravityScale = fallMultiplier;
         }
         else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) {
+            // player is doing a low jump
             rb.gravityScale = lowJumpMultiplier;
         }
         else {
+            // player is doing a high jump or not jumping 
             rb.gravityScale = 1f;
         }
     }
