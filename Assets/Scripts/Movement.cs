@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour {
     private bool jump;
     private Vector2 boxSize;
     private Vector2 playerSize;
+    private float defaultGravity;
 
     // editor vars
     public float speed = 10;
@@ -19,10 +20,17 @@ public class Movement : MonoBehaviour {
     public bool grounded;
     public LayerMask groundLayer;
 
+    // dash 
+    public float dashSpeed;
+    private float dashTime;
+    public float maxDashTime;
+    private Vector2 dashDir;
+
     private void Awake() {
         playerSize = GetComponent<BoxCollider2D>().size;
         boxSize = new Vector2(playerSize.x, groundDepth);
         rb = GetComponent<Rigidbody2D>();
+        defaultGravity = rb.gravityScale;
     }
 
     private void Update() {
@@ -36,7 +44,7 @@ public class Movement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        rb.velocity = new Vector2(dir * speed, rb.velocity.y);
+        rb.velocity = grounded ? new Vector2(0, rb.velocity.y) : new Vector2(dir * speed, rb.velocity.y);
 
         if (jump) {
             rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
@@ -56,15 +64,15 @@ public class Movement : MonoBehaviour {
     private void HandleJumpGravity() {
         if (rb.velocity.y < 0) {
             // player is falling 
-            rb.gravityScale = fallMultiplier;
+            rb.gravityScale = fallMultiplier * defaultGravity;
         }
         else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) {
             // player is doing a low jump
-            rb.gravityScale = lowJumpMultiplier;
+            rb.gravityScale = lowJumpMultiplier * defaultGravity;
         }
         else {
             // player is doing a high jump or not jumping 
-            rb.gravityScale = 1f;
+            rb.gravityScale = defaultGravity;
         }
     }
 }
