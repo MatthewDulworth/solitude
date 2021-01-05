@@ -274,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048487421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -3.96, z: -6.028219}
+  m_LocalPosition: {x: -0.04, y: -1.36, z: -6.028219}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -295,8 +295,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 86118722e234d4e6caa4e0e8e5c4e5fe, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -339,6 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df286fae84b246d29b1c98be3715908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  facingRight: 1
   speed: 10
   jumpVelocity: 10
   fallMultiplier: 3
@@ -348,8 +349,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8192
-  dashSpeed: 0
-  maxDashTime: 0
+  distBetweenAfterImages: 10
 --- !u!1 &1738041364
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,30 +1,27 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(BoxCollider2D))]
 public class Movement : MonoBehaviour {
     // private vars
     private Rigidbody2D rb;
     private int dir;
-    private bool jump;
+    private bool jumpRequested;
     private Vector2 boxSize;
     private Vector2 playerSize;
     private float defaultGravity;
+    public bool facingRight = true;
 
     // editor vars
-    public float speed = 10;
-    public float jumpVelocity = 5;
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
-    public float groundDepth = 0.05f;
+    public float speed;
+    public float jumpVelocity;
+    public float fallMultiplier;
+    public float lowJumpMultiplier;
+    public float groundDepth;
     public bool grounded;
     public LayerMask groundLayer;
 
     // dash 
-    public float dashSpeed;
-    private float dashTime;
-    public float maxDashTime;
-    private Vector2 dashDir;
+    private bool dashRequested;
+    public float distBetweenAfterImages;
 
     private void Awake() {
         playerSize = GetComponent<BoxCollider2D>().size;
@@ -39,28 +36,40 @@ public class Movement : MonoBehaviour {
         dir += Input.GetKey(KeyCode.A) ? -1 : 0;
         dir += Input.GetKey(KeyCode.D) ? 1 : 0;
 
-        // update jump
-        jump = (Input.GetKeyDown(KeyCode.Space) || jump) && grounded;
+        jumpRequested = (Input.GetKeyDown(KeyCode.K) || jumpRequested) && grounded;
+        dashRequested = (Input.GetKeyDown(KeyCode.Space) || dashRequested);
     }
 
     private void FixedUpdate() {
-        rb.velocity = grounded ? new Vector2(0, rb.velocity.y) : new Vector2(dir * speed, rb.velocity.y);
-
-        if (jump) {
-            rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
-            jump = false;
-        }
-        else {
-            Vector2 boxCenter = (Vector2) transform.position + Vector2.down * ((playerSize.y + boxSize.y) * 0.5f);
-            grounded = Physics2D.OverlapBox(boxCenter, boxSize, 0, groundLayer) != null;
-        }
-
+        CheckGrounded();
+        HandleDash();
+        HandleHorizontalMove();
+        HandleJump();
         HandleJumpGravity();
     }
 
-    /**
-     * Handles the behavior for long and short jumps as well as fall speed.
-     */
+    private void CheckGrounded() {
+        Vector2 boxCenter = (Vector2) transform.position + Vector2.down * ((playerSize.y + boxSize.y) * 0.5f);
+        grounded = Physics2D.OverlapBox(boxCenter, boxSize, 0, groundLayer) != null;
+    }
+
+    private void HandleHorizontalMove() {
+        rb.velocity = new Vector2(dir * speed, rb.velocity.y);
+    }
+
+    private void HandleDash() {
+        if (dashRequested) {
+        }
+    }
+
+    private void HandleJump() {
+        if (jumpRequested) {
+            rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
+            jumpRequested = false;
+        }
+    }
+
+    // Handles the behavior for long and short jumps as well as fall speed.
     private void HandleJumpGravity() {
         if (rb.velocity.y < 0) {
             // player is falling 
