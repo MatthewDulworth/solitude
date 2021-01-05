@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour {
     private int dir;
     private bool jumpRequested;
     private bool dashRequested;
-    private Vector2 boxSize;
+    private Vector2 groundDetectorSize;
     private Vector2 playerSize;
     private float defaultGravity;
 
@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour {
     public bool facingRight = true;
 
     [Header("Collision Detection")] public LayerMask groundLayer;
-    public float groundDepth;
+    public float groundDetectorHeight;
 
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ public class Movement : MonoBehaviour {
     // -----------------------------------------------------------------------------------------------------------------
     private void Awake() {
         playerSize = GetComponent<BoxCollider2D>().size;
-        boxSize = new Vector2(playerSize.x, groundDepth);
+        groundDetectorSize = new Vector2(playerSize.x, groundDetectorHeight);
         rb = GetComponent<Rigidbody2D>();
         defaultGravity = rb.gravityScale;
     }
@@ -64,8 +64,9 @@ public class Movement : MonoBehaviour {
     }
 
     private void CheckGrounded() {
-        Vector2 boxCenter = (Vector2) transform.position + Vector2.down * ((playerSize.y + boxSize.y) * 0.5f);
-        grounded = Physics2D.OverlapBox(boxCenter, boxSize, 0, groundLayer) != null;
+        Vector2 boxCenter = (Vector2) transform.position +
+                            Vector2.down * ((playerSize.y + groundDetectorSize.y) * 0.5f);
+        grounded = Physics2D.OverlapBox(boxCenter, groundDetectorSize, 0, groundLayer) != null;
     }
 
     private void HandleHorizontalMove() {

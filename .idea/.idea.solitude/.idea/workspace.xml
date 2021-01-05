@@ -20,6 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff5129ce-aa9a-4842-8cb8-bb3621b5e3e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.solitude/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.solitude/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.solitude/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.solitude/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/movement.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/movement.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,6 +47,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Dash.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAfterImagePool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAfterImage.cs" />
+        <option value="$PROJECT_DIR$/Assets/Editor/ReadOnlyDrawer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Editor/ReadOnlyAttribute.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Movement.cs" />
       </list>
     </option>
@@ -100,7 +105,7 @@
       <workItem from="1609530426543" duration="8786000" />
       <workItem from="1609693872234" duration="639000" />
       <workItem from="1609782124740" duration="6180000" />
-      <workItem from="1609875056796" duration="2490000" />
+      <workItem from="1609875056796" duration="3286000" />
     </task>
     <servers />
   </component>
@@ -110,6 +115,15 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">

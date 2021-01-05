@@ -339,17 +339,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df286fae84b246d29b1c98be3715908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  facingRight: 1
   speed: 10
   jumpVelocity: 10
   fallMultiplier: 3
   lowJumpMultiplier: 2
-  groundDepth: 0.05
+  distBetweenAfterImages: 10
   grounded: 0
+  facingRight: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8192
-  distBetweenAfterImages: 10
+  groundDetectorHeight: 0.2
 --- !u!1 &1738041364
 GameObject:
   m_ObjectHideFlags: 0
