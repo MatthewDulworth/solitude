@@ -1,28 +1,37 @@
 ﻿using UnityEngine;
 
 public class Movement : MonoBehaviour {
-    // private vars
+    // -----------------------------------------------------------------------------------------------------------------
+    // Private Vars 
+    // -----------------------------------------------------------------------------------------------------------------
     private Rigidbody2D rb;
     private int dir;
     private bool jumpRequested;
+    private bool dashRequested;
     private Vector2 boxSize;
     private Vector2 playerSize;
     private float defaultGravity;
-    public bool facingRight = true;
 
-    // editor vars
-    public float speed;
+    // -----------------------------------------------------------------------------------------------------------------
+    // Editor Variables 
+    // -----------------------------------------------------------------------------------------------------------------
+    [Header("Stats")] public float speed;
     public float jumpVelocity;
     public float fallMultiplier;
     public float lowJumpMultiplier;
+
+    [Header("Effects")] public float distBetweenAfterImages;
+
+    [Header("State")] public bool grounded;
+    public bool facingRight = true;
+
+    [Header("Collision Detection")] public LayerMask groundLayer;
     public float groundDepth;
-    public bool grounded;
-    public LayerMask groundLayer;
 
-    // dash 
-    private bool dashRequested;
-    public float distBetweenAfterImages;
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // Startup 
+    // -----------------------------------------------------------------------------------------------------------------
     private void Awake() {
         playerSize = GetComponent<BoxCollider2D>().size;
         boxSize = new Vector2(playerSize.x, groundDepth);
@@ -30,6 +39,9 @@ public class Movement : MonoBehaviour {
         defaultGravity = rb.gravityScale;
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // Input 
+    // -----------------------------------------------------------------------------------------------------------------
     private void Update() {
         // update direction 
         dir = 0;
@@ -40,6 +52,9 @@ public class Movement : MonoBehaviour {
         dashRequested = (Input.GetKeyDown(KeyCode.Space) || dashRequested);
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // Movement
+    // -----------------------------------------------------------------------------------------------------------------
     private void FixedUpdate() {
         CheckGrounded();
         HandleDash();
