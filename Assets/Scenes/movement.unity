@@ -295,7 +295,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 86118722e234d4e6caa4e0e8e5c4e5fe, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -340,12 +340,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpVelocity: 10
+  jumpSpeed: 10
   fallMultiplier: 3
   lowJumpMultiplier: 2
+  dashSpeed: 0
   distBetweenAfterImages: 10
-  grounded: 0
-  facingRight: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8192

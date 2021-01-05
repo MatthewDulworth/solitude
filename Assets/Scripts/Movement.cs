@@ -1,29 +1,38 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Movement : MonoBehaviour {
     // -----------------------------------------------------------------------------------------------------------------
     // Private Vars 
     // -----------------------------------------------------------------------------------------------------------------
     private Rigidbody2D rb;
-    private int dir;
+    private float defaultGravity;
+
+    // state 
+    private bool canMove = true;
+    private bool facingRight = true;
+    private bool grounded;
+    private bool isDashing;
+    private Vector2 directionHeld;
+
+    // input 
     private bool jumpRequested;
     private bool dashRequested;
+
+    // ground detection
     private Vector2 groundDetectorSize;
     private Vector2 playerSize;
-    private float defaultGravity;
 
     // -----------------------------------------------------------------------------------------------------------------
     // Editor Variables 
     // -----------------------------------------------------------------------------------------------------------------
     [Header("Stats")] public float speed;
-    public float jumpVelocity;
+    public float jumpSpeed;
     public float fallMultiplier;
     public float lowJumpMultiplier;
+    public float dashSpeed;
 
     [Header("Effects")] public float distBetweenAfterImages;
-
-    [Header("State")] public bool grounded;
-    public bool facingRight = true;
 
     [Header("Collision Detection")] public LayerMask groundLayer;
     public float groundDetectorHeight;
@@ -43,13 +52,18 @@ public class Movement : MonoBehaviour {
     // Input 
     // -----------------------------------------------------------------------------------------------------------------
     private void Update() {
-        // update direction 
-        dir = 0;
-        dir += Input.GetKey(KeyCode.A) ? -1 : 0;
-        dir += Input.GetKey(KeyCode.D) ? 1 : 0;
-
         jumpRequested = (Input.GetKeyDown(KeyCode.K) || jumpRequested) && grounded;
         dashRequested = (Input.GetKeyDown(KeyCode.Space) || dashRequested);
+        directionHeld = GetDirectionHeld();
+    }
+
+    private Vector2 GetDirectionHeld() {
+        Vector2 direction = Vector2.zero;
+        direction += Input.GetKey(KeyCode.W) ? Vector2.up : Vector2.zero;
+        direction += Input.GetKey(KeyCode.D) ? Vector2.right : Vector2.zero;
+        direction += Input.GetKey(KeyCode.S) ? Vector2.down : Vector2.zero;
+        direction += Input.GetKey(KeyCode.A) ? Vector2.left : Vector2.zero;
+        return direction;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -57,30 +71,36 @@ public class Movement : MonoBehaviour {
     // -----------------------------------------------------------------------------------------------------------------
     private void FixedUpdate() {
         CheckGrounded();
-        HandleDash();
-        HandleHorizontalMove();
-        HandleJump();
-        HandleJumpGravity();
+        if (canMove) {
+            HandleDash();
+            HandleHorizontalMove();
+            HandleJump();
+            HandleJumpGravity();
+        }
     }
 
     private void CheckGrounded() {
-        Vector2 boxCenter = (Vector2) transform.position +
-                            Vector2.down * ((playerSize.y + groundDetectorSize.y) * 0.5f);
+        Vector2 boxCenter = transform.position;
+        boxCenter += Vector2.down * ((playerSize.y + groundDetectorSize.y) * 0.5f);
         grounded = Physics2D.OverlapBox(boxCenter, groundDetectorSize, 0, groundLayer) != null;
     }
 
     private void HandleHorizontalMove() {
-        rb.velocity = new Vector2(dir * speed, rb.velocity.y);
+        rb.velocity = new Vector2(directionHeld.x * speed, rb.velocity.y);
     }
 
     private void HandleDash() {
         if (dashRequested) {
+            Dash(directionHeld);
         }
+    }
+
+    private void Dash(Vector2 direction) {
     }
 
     private void HandleJump() {
         if (jumpRequested) {
-            rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             jumpRequested = false;
         }
     }
