@@ -343,7 +343,9 @@ MonoBehaviour:
   jumpSpeed: 10
   fallMultiplier: 3
   lowJumpMultiplier: 2
-  dashSpeed: 0
+  dashSpeed: 30
+  dashWait: 0.2
+  dashDrag: 10
   distBetweenAfterImages: 10
   groundLayer:
     serializedVersion: 2

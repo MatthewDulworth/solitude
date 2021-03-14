@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
@@ -6,7 +7,9 @@ public class Movement : MonoBehaviour {
     // Private Vars 
     // -----------------------------------------------------------------------------------------------------------------
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
     private float defaultGravity;
+    private float defaultDrag;
 
     // state 
     private bool canMove = true;
@@ -31,6 +34,8 @@ public class Movement : MonoBehaviour {
     public float fallMultiplier;
     public float lowJumpMultiplier;
     public float dashSpeed;
+    public float dashWait;
+    public float dashDrag;
 
     [Header("Effects")] public float distBetweenAfterImages;
 
@@ -45,7 +50,10 @@ public class Movement : MonoBehaviour {
         playerSize = GetComponent<BoxCollider2D>().size;
         groundDetectorSize = new Vector2(playerSize.x, groundDetectorHeight);
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        sr.color = Color.green;
         defaultGravity = rb.gravityScale;
+        defaultDrag = rb.drag;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -72,7 +80,9 @@ public class Movement : MonoBehaviour {
     private void FixedUpdate() {
         CheckGrounded();
         if (canMove) {
-            HandleDash();
+            if (HandleDash()) {
+                return;
+            }
             HandleHorizontalMove();
             HandleJump();
             HandleJumpGravity();
@@ -89,13 +99,35 @@ public class Movement : MonoBehaviour {
         rb.velocity = new Vector2(directionHeld.x * speed, rb.velocity.y);
     }
 
-    private void HandleDash() {
+    private bool HandleDash() {
         if (dashRequested) {
-            Dash(directionHeld);
+            Vector2 dashDir = directionHeld;
+            if (dashDir.Equals(Vector2.zero)) {
+                int facing = facingRight ? 1 : -1;
+                dashDir = new Vector2(facing, 0);
+            }
+
+            Debug.Log(dashDir * dashSpeed);
+            rb.AddForce(dashSpeed * dashDir, ForceMode2D.Impulse);
+            
+            StartCoroutine(DashWait());
+            dashRequested = false;
+            return true;
         }
+        return false;
     }
 
-    private void Dash(Vector2 direction) {
+    private IEnumerator DashWait() {
+        canMove = false;
+        rb.gravityScale = 0;
+        rb.drag = dashDrag;
+        sr.color = Color.red;
+        yield return new WaitForSeconds(dashWait);
+
+        sr.color = Color.green;
+        rb.drag = defaultDrag;
+        rb.gravityScale = defaultGravity;
+        canMove = true;
     }
 
     private void HandleJump() {
