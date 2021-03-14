@@ -80,7 +80,7 @@ public class Movement : MonoBehaviour {
     private void FixedUpdate() {
         CheckGrounded();
         if (canMove) {
-            if (HandleDash()) {
+            if (HandleDash()){
                 return;
             }
             HandleHorizontalMove();
@@ -106,10 +106,9 @@ public class Movement : MonoBehaviour {
                 int facing = facingRight ? 1 : -1;
                 dashDir = new Vector2(facing, 0);
             }
-
-            Debug.Log(dashDir * dashSpeed);
-            rb.AddForce(dashSpeed * dashDir, ForceMode2D.Impulse);
             
+            rb.gravityScale = 0;
+            rb.AddForce(dashSpeed * dashDir, ForceMode2D.Impulse);
             StartCoroutine(DashWait());
             dashRequested = false;
             return true;
